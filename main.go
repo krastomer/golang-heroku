@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	port := 1323
+	port := 80
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
