@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -13,5 +14,7 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
-	e.Logger.Fatal(e.Start(":" + port))
+
+	address := fmt.Sprintf("%s:%s", "0.0.0.0", port)
+	e.Start(address)
 }
