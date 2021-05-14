@@ -1,4 +1,4 @@
-module v1
+module github.com/krastomer/golang-heroku
 
 go 1.16
 
