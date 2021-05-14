@@ -3,17 +3,22 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"path"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo"
 )
 
 func main() {
-	port := 80
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	server := echo.New()
+	server.GET(path.Join("/"), Version)
 
-	address := fmt.Sprintf("%s:%v", "0.0.0.0", port)
-	e.Start(address)
+	port := os.Getenv("PORT")
+
+	address := fmt.Sprintf("%s:%s", "0.0.0.0", port)
+	server.Start(address)
+}
+
+func Version(context echo.Context) error {
+	return context.JSON(http.StatusOK, map[string]interface{}{"version": 1})
 }
